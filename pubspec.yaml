@@ -1,15 +1,24 @@
 name: mpesa4dart
-description: A starting point for Dart libraries or applications.
-version: 1.0.0
-# homepage: https://www.example.com
+description: A native dart package for Mpesa. There are various other Mpesa libraries, but this package uses a different approach. It does not wrap existing MPesa libraries, but instead accesses the Mpesa API directly.
+version: 23.0.1
+homepage: https://openapiportal.m-pesa.com/
 
 environment:
   sdk: '>=2.18.6 <3.0.0'
-
-dev_dependencies:
-  lints: ^2.0.0
-  test: ^1.16.0
   
 dependencies:
   encrypt: ^5.0.1
   basic_utils: ^5.4.2
+  tripledes: 
+  http: 
+  built_value: 
+  built_collection: 
+  meta: 
+  convert: 
+
+dev_dependencies:
+  lints: ^2.0.0
+  test: ^1.16.0
+  pedantic: 
+  build_runner: 
+  built_value_generator: 
