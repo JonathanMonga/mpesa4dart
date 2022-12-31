@@ -1,7 +1,7 @@
 name: mpesa4dart
 description: A native dart package for Mpesa. There are various other Mpesa libraries, but this package uses a different approach. It does not wrap existing MPesa libraries, but instead accesses the Mpesa API directly.
 version: 23.0.1
-homepage: https://openapiportal.m-pesa.com/
+homepage: https://www.openapiportal.m-pesa.com/
 
 environment:
   sdk: '>=2.18.6 <3.0.0'
