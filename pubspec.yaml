@@ -13,14 +13,14 @@ dependencies:
   meta: 
   convert: 
   encrypt: ^5.0.1
-  tripledes: 
+  tripledes: ^2.1.0
   basic_utils: ^5.4.2
-  built_value: 
-  built_collection: 
+  built_value: ^8.4.2
+  built_collection: ^5.1.1
 
 dev_dependencies:
   lints: ^2.0.0
   test: ^1.16.0
-  pedantic: 
-  build_runner: 
-  built_value_generator: 
+  pedantic: ^1.11.1
+  build_runner: ^2.3.3
+  built_value_generator: ^8.4.2
