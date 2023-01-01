@@ -15,7 +15,7 @@ SessionResponse _$SessionResponseFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$SessionResponseToJson(SessionResponse instance) =>
     <String, dynamic>{
-      'output_ResponseCode': instance.outputResponseCode,
-      'output_ResponseDesc': instance.outputResponseDesc,
-      'output_SessionID': instance.outputSessionID,
+      'output_ResponseCode': instance.responseCode,
+      'output_ResponseDesc': instance.responseDesc,
+      'output_SessionID': instance.sessionID,
     };
