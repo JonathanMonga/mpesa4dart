@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 /*
  * Created on Sun Jan 01 2023
  *

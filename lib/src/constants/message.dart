@@ -30,5 +30,4 @@ class Message {
       'This is an invalid transaction.';
   static const String cannotCompleteValidationMessage =
       'This transaction cannot be completed at the moment.';
-  static const String INS_0 = 'Request processed successfully.';
 }
