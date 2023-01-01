@@ -19,16 +19,24 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-class Message {
-  static const String errorMessage = 'An error occurred.';
-  static const String timeoutErrorMessage = 'Opps! That took too long. Retry?';
-  static const String authUrlValidationMessage =
-      'Please validate using the authUrl.';
-  static const String authUrlProvidedValidationMessage =
-      'AuthUrl was provided. Should redirect.';
-  static const String invalidValidationMessage =
-      'This is an invalid transaction.';
-  static const String cannotCompleteValidationMessage =
-      'This transaction cannot be completed at the moment.';
-  static const String INS_0 = 'Request processed successfully.';
+import 'package:mpesa4dart/src/constants/response_code.dart';
+import 'package:mpesa4dart/src/constants/response_description.dart';
+
+class ResponseStatus {
+  factory ResponseStatus({String? code}) {
+    String responseDescription;
+
+    switch (code) {
+      case ResponseCode.INS_0:
+        responseDescription = ResponsDescription.INS_0;
+        break;
+      default:
+        responseDescription = ResponsDescription.INS_0;
+    }
+
+    return ResponseStatus._(message: responseDescription);
+  }
+
+  ResponseStatus._({this.message});
+  final String? message;
 }

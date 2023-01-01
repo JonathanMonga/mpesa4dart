@@ -19,16 +19,6 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-class Message {
-  static const String errorMessage = 'An error occurred.';
-  static const String timeoutErrorMessage = 'Opps! That took too long. Retry?';
-  static const String authUrlValidationMessage =
-      'Please validate using the authUrl.';
-  static const String authUrlProvidedValidationMessage =
-      'AuthUrl was provided. Should redirect.';
-  static const String invalidValidationMessage =
-      'This is an invalid transaction.';
-  static const String cannotCompleteValidationMessage =
-      'This transaction cannot be completed at the moment.';
+class ResponsDescription {
   static const String INS_0 = 'Request processed successfully.';
 }

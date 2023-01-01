@@ -19,4 +19,48 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+import 'dart:async';
+import 'dart:convert';
 
+import 'package:http/http.dart' as http;
+import 'package:mpesa4dart/src/utils/exceptions.dart';
+import 'package:mpesa4dart/src/utils/log.dart';
+
+class HttpWrapper {
+  HttpWrapper({required this.baseUrl});
+
+  final String baseUrl;
+
+  Future<http.Response> get(String url, String encriptedKey) {
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Origin': '*',
+      'Authorization': 'Bearer $encriptedKey'
+    };
+    try {
+      Log().debug('HttpWrapper.get() -> $url');
+      return http.get(Uri.parse(baseUrl + url), headers: headers);
+    } on TimeoutException {
+      throw TimeOutException();
+    }
+  }
+
+  Future<http.Response> post(
+      String url, String encriptedKey, Map<String, dynamic> data) {
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Origin': '*',
+      'Authorization': 'Bearer $encriptedKey'
+    };
+
+    try {
+      final body = json.encode(data);
+      Log().debug('HttpWrapper.post() -> $url', body);
+      return http.post(Uri.parse(baseUrl + url), headers: headers, body: body);
+    } on TimeoutException {
+      throw TimeOutException();
+    }
+  }
+}

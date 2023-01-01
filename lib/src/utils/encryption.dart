@@ -19,16 +19,28 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-class Message {
-  static const String errorMessage = 'An error occurred.';
-  static const String timeoutErrorMessage = 'Opps! That took too long. Retry?';
-  static const String authUrlValidationMessage =
-      'Please validate using the authUrl.';
-  static const String authUrlProvidedValidationMessage =
-      'AuthUrl was provided. Should redirect.';
-  static const String invalidValidationMessage =
-      'This is an invalid transaction.';
-  static const String cannotCompleteValidationMessage =
-      'This transaction cannot be completed at the moment.';
-  static const String INS_0 = 'Request processed successfully.';
+// ignore_for_file: depend_on_referenced_packages
+
+import 'package:encrypt/encrypt.dart';
+import 'package:basic_utils/basic_utils.dart';
+
+class Encryption {
+  const Encryption({required this.publicKey});
+
+  static const String _begin = X509Utils.BEGIN_PKCS7;
+  static const String _end = X509Utils.END_PKCS7;
+
+  final String publicKey;
+
+  String encrypt(String key) {
+    var formatedKey = X509Utils.formatKeyString(publicKey, _begin, _end);
+    var rsaPublicKey = CryptoUtils.rsaPublicKeyFromPem(formatedKey);
+    Encrypter encrypter;
+    Encrypted encrypted;
+
+    encrypter = Encrypter(RSA(publicKey: rsaPublicKey));
+    encrypted = encrypter.encrypt(key);
+
+    return encrypted.base64;
+  }
 }
