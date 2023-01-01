@@ -28,17 +28,16 @@ part 'session_response.g.dart';
 /// JSON serialization logic to be generated.
 @JsonSerializable()
 class SessionResponse {
-  SessionResponse(
-      this.outputResponseCode, this.outputResponseDesc, this.outputSessionID);
+  SessionResponse(this.responseCode, this.responseDesc, this.sessionID);
 
   @JsonKey(name: ApiParams.OutputResponseCode)
-  String outputResponseCode;
+  String responseCode;
 
   @JsonKey(name: ApiParams.OutputResponseDesc)
-  String outputResponseDesc;
+  String responseDesc;
 
   @JsonKey(name: ApiParams.OutputSessionID)
-  String outputSessionID;
+  String sessionID;
 
   /// A necessary factory constructor for creating a new User instance
   /// from a map. Pass the map to the generated `_$UserFromJson()` constructor.
@@ -53,5 +52,5 @@ class SessionResponse {
 
   @override
   String toString() =>
-      '$runtimeType(outputResponseCode: $outputResponseCode, outputResponseDesc: $outputResponseDesc, outputSessionID: $outputSessionID)';
+      '$runtimeType(outputResponseCode: $responseCode, outputResponseDesc: $responseDesc, outputSessionID: $sessionID)';
 }

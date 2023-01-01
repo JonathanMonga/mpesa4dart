@@ -18,7 +18,7 @@ void main() async {
 
   var sessionKey = await SessionKey().generate();
 
-  print('outputResponseCode : ${sessionKey.outputResponseCode}');
-  print('outputResponseDesc : ${sessionKey.outputResponseDesc}');
-  print('outputSessionID : ${sessionKey.outputSessionID}');
+  print('outputResponseCode : ${sessionKey.responseCode}');
+  print('outputResponseDesc : ${sessionKey.responseDesc}');
+  print('outputSessionID : ${sessionKey.sessionID}');
 }
