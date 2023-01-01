@@ -20,6 +20,5 @@ dependencies:
 dev_dependencies:
   lints: ^2.0.0
   test: ^1.16.0
-  pedantic: ^1.11.1
   build_runner: ^2.3.3
   built_value_generator: ^8.4.2
