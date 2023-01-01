@@ -19,7 +19,7 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-class Keys {
+class ApiParams {
   // API Response params C2B SINGLE STAGE
   static const String OutputTransactionID = 'output_TransactionID';
   static const String OutputConversationID = 'output_ConversationID';

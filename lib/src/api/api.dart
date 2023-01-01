@@ -1,3 +1,4 @@
+import 'package:mpesa4dart/src/mpesa4dart.dart';
 /*
  * Created on Sun Jan 01 2023
  *
@@ -19,28 +20,14 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-// ignore_for_file: depend_on_referenced_packages
+import 'package:mpesa4dart/src/utils/http_wrapper.dart';
 
-import 'package:encrypt/encrypt.dart';
-import 'package:basic_utils/basic_utils.dart';
+class Api {
+  Api()
+      : http =
+            HttpWrapper(baseUrl: MPesa4Dart().baseUrl! + MPesa4Dart().market!),
+        encriptedKey = MPesa4Dart().encriptedApiKey!;
 
-class Encryption {
-  const Encryption({required this.publicKey});
-
-  static const String _begin = X509Utils.BEGIN_PKCS7;
-  static const String _end = X509Utils.END_PKCS7;
-
-  final String? publicKey;
-
-  String encrypt(String? key) {
-    var formatedKey = X509Utils.formatKeyString(publicKey!, _begin, _end);
-    var rsaPublicKey = CryptoUtils.rsaPublicKeyFromPem(formatedKey);
-    Encrypter encrypter;
-    Encrypted encrypted;
-
-    encrypter = Encrypter(RSA(publicKey: rsaPublicKey));
-    encrypted = encrypter.encrypt(key!);
-
-    return encrypted.base64;
-  }
+  final HttpWrapper http;
+  final String encriptedKey;
 }

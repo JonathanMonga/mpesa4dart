@@ -21,7 +21,7 @@
 
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
-import 'package:mpesa4dart/src/constants/keys.dart';
+import 'package:mpesa4dart/src/constants/api_params.dart';
 import 'package:mpesa4dart/src/models/model_interface.dart';
 import 'package:mpesa4dart/src/models/serializers.dart';
 
@@ -34,13 +34,13 @@ abstract class SessionResponse
   factory SessionResponse([void Function(SessionResponseBuilder) updates]) =
       _$SessionResponse;
 
-  @BuiltValueField(wireName: Keys.OutputResponseCode)
+  @BuiltValueField(wireName: ApiParams.OutputResponseCode)
   String get outputResponseCode;
 
-  @BuiltValueField(wireName: Keys.OutputResponseDesc)
+  @BuiltValueField(wireName: ApiParams.OutputResponseDesc)
   String get outputResponseDesc;
 
-  @BuiltValueField(wireName: Keys.OutputSessionID)
+  @BuiltValueField(wireName: ApiParams.OutputSessionID)
   String get outputSessionID;
 
   @override

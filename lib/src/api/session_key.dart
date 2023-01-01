@@ -19,28 +19,23 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-// ignore_for_file: depend_on_referenced_packages
+import 'package:mpesa4dart/src/api/api.dart';
+import 'package:mpesa4dart/src/constants/endpoints.dart';
+import 'package:mpesa4dart/src/models/session_response.dart';
+import 'package:mpesa4dart/src/utils/log.dart';
+import 'package:mpesa4dart/src/utils/response.dart';
 
-import 'package:encrypt/encrypt.dart';
-import 'package:basic_utils/basic_utils.dart';
+class SessionKey extends Api {
+  Future<SessionResponse> generate() async {
+    final response = Response<SessionResponse>(
+      await http.get(Endpoints.getSession, encriptedKey),
+      onTransform: (dynamic data, _) {
+        return SessionResponse.fromJson(data)!;
+      },
+    );
 
-class Encryption {
-  const Encryption({required this.publicKey});
+    Log().debug('$runtimeType.fetch() -> Response', response);
 
-  static const String _begin = X509Utils.BEGIN_PKCS7;
-  static const String _end = X509Utils.END_PKCS7;
-
-  final String? publicKey;
-
-  String encrypt(String? key) {
-    var formatedKey = X509Utils.formatKeyString(publicKey!, _begin, _end);
-    var rsaPublicKey = CryptoUtils.rsaPublicKeyFromPem(formatedKey);
-    Encrypter encrypter;
-    Encrypted encrypted;
-
-    encrypter = Encrypter(RSA(publicKey: rsaPublicKey));
-    encrypted = encrypter.encrypt(key!);
-
-    return encrypted.base64;
+    return response.data!;
   }
 }

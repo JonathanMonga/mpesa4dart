@@ -1,4 +1,6 @@
 import 'package:meta/meta.dart';
+import 'package:mpesa4dart/src/constants/markets.dart';
+import 'package:mpesa4dart/src/utils/encryption.dart';
 import 'package:mpesa4dart/src/utils/log.dart';
 import 'package:mpesa4dart/src/constants/url.dart';
 
@@ -6,7 +8,9 @@ class MPesa4Dart {
   factory MPesa4Dart() => _instance!;
 
   MPesa4Dart._(
-      {required this.publicKey, required this.apiKey, required this.production})
+      {required this.encriptedApiKey,
+      required this.market,
+      required this.production})
       : baseUrl = production! ? Url.prod : Url.sandbox;
 
   @visibleForTesting
@@ -18,29 +22,27 @@ class MPesa4Dart {
     required String? publicKey,
     required String? apiKey,
     required bool? production,
+    String? market = Markets.vodacomDRC,
     bool? useLogger = false,
     bool? restart = false,
   }) {
-    assert(publicKey != null);
-    assert(apiKey != null);
-    assert(production != null);
-    assert((_instance != null && restart == true) || _instance == null,
-        'Are you trying to reset the previous keys by calling MPesa4Dart.init() again?.');
     _instance = MPesa4Dart._(
-        publicKey: publicKey, apiKey: apiKey, production: production);
+        encriptedApiKey: Encryption(publicKey: publicKey).encrypt(apiKey),
+        market: market,
+        production: production);
     // Initialize logger
     Log.init(!useLogger!);
   }
 
   static MPesa4Dart? _instance;
 
-  final String? publicKey;
-  final String? apiKey;
+  final String? encriptedApiKey;
+  final String? market;
   final bool? production;
   final String? baseUrl;
 
   @override
   String toString() {
-    return '$runtimeType(publicKey: $publicKey, apiKey: $apiKey, production: $production, baseUrl: $baseUrl)';
+    return '$runtimeType(apiKey: $encriptedApiKey, markets: $market, production: $production, baseUrl: $baseUrl)';
   }
 }

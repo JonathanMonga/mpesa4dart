@@ -23,7 +23,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
-import 'package:mpesa4dart/src/constants/keys.dart';
+import 'package:mpesa4dart/src/constants/api_params.dart';
 import 'package:mpesa4dart/src/constants/message.dart';
 import 'package:mpesa4dart/src/constants/response_code.dart';
 import 'package:mpesa4dart/src/mpesa4dart.dart';
@@ -44,15 +44,15 @@ class Response<T> {
       }
 
       final String responseCode = jsonResponse is Map &&
-              jsonResponse.containsKey(Keys.OutputResponseCode) &&
+              jsonResponse.containsKey(ApiParams.OutputResponseCode) &&
               reponseStatus.isOk
-          ? jsonResponse[Keys.OutputResponseCode]
+          ? jsonResponse[ApiParams.OutputResponseCode]
           : ResponseCode.INS_989;
 
       final String message = jsonResponse is Map &&
-              jsonResponse.containsKey(Keys.OutputResponseDesc) &&
-              jsonResponse[Keys.OutputResponseDesc] != null
-          ? jsonResponse[Keys.OutputResponseDesc]
+              jsonResponse.containsKey(ApiParams.OutputResponseDesc) &&
+              jsonResponse[ApiParams.OutputResponseDesc] != null
+          ? jsonResponse[ApiParams.OutputResponseDesc]
           : MPesa4Dart().production!
               ? response.reasonPhrase
               : Message.errorMessage;
