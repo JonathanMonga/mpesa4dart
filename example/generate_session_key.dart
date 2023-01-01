@@ -1,7 +1,6 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'dart:io';
-
 import 'package:mpesa4dart/src/api/session_key.dart';
 import 'package:mpesa4dart/src/constants/markets.dart';
 import 'package:mpesa4dart/src/mpesa4dart.dart';
