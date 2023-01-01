@@ -18,14 +18,12 @@ class MPesa4Dart {
     _instance = null;
   }
 
-  static void init({
-    required String? publicKey,
-    required String? apiKey,
-    required bool? production,
-    String? market = Markets.vodacomDRC,
-    bool? useLogger = false,
-    bool? restart = false,
-  }) {
+  static void init(
+      {required String? publicKey,
+      required String? apiKey,
+      required bool? production,
+      String? market = Markets.vodacomDRC,
+      bool? useLogger = false}) {
     _instance = MPesa4Dart._(
         encriptedApiKey: Encryption(publicKey: publicKey).encrypt(apiKey),
         market: market,
@@ -40,9 +38,4 @@ class MPesa4Dart {
   final String? market;
   final bool? production;
   final String? baseUrl;
-
-  @override
-  String toString() {
-    return '$runtimeType(apiKey: $encriptedApiKey, markets: $market, production: $production, baseUrl: $baseUrl)';
-  }
 }

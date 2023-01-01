@@ -28,11 +28,10 @@ import 'package:mpesa4dart/src/utils/response.dart';
 class SessionKey extends Api {
   Future<SessionResponse> generate() async {
     final response = Response<SessionResponse>(
-      await http.get(Endpoints.getSession, encriptedKey),
-      onTransform: (dynamic data, _) {
-        return SessionResponse.fromJson(data)!;
-      },
-    );
+        await http.get(Endpoints.getSession, encriptedKey),
+        onTransform: (dynamic data) {
+      return SessionResponse.fromJson(data);
+    }, shouldThrow: false);
 
     Log().debug('$runtimeType.fetch() -> Response', response);
 

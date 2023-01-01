@@ -29,8 +29,9 @@ import 'package:mpesa4dart/src/constants/response_code.dart';
 import 'package:mpesa4dart/src/mpesa4dart.dart';
 import 'package:mpesa4dart/src/utils/exceptions.dart';
 import 'package:mpesa4dart/src/utils/log.dart';
+import 'package:mpesa4dart/src/utils/response_status.dart';
 
-typedef TransformFunction<T> = T Function(dynamic data, String status);
+typedef TransformFunction<T> = T Function(dynamic data);
 
 class Response<T> {
   factory Response(http.Response response,
@@ -38,6 +39,7 @@ class Response<T> {
     final reponseStatus = Status(response.statusCode);
     try {
       final dynamic jsonResponse = json.decode(response.body);
+
       if (jsonResponse == null ||
           (jsonResponse is! Map && jsonResponse is! List)) {
         throw ResponseException(reponseStatus.code, response.reasonPhrase!);
@@ -49,13 +51,7 @@ class Response<T> {
           ? jsonResponse[ApiParams.OutputResponseCode]
           : ResponseCode.INS_989;
 
-      final String message = jsonResponse is Map &&
-              jsonResponse.containsKey(ApiParams.OutputResponseDesc) &&
-              jsonResponse[ApiParams.OutputResponseDesc] != null
-          ? jsonResponse[ApiParams.OutputResponseDesc]
-          : MPesa4Dart().production!
-              ? response.reasonPhrase
-              : Message.errorMessage;
+      final String message = ResponseStatus(code: responseCode).message!;
 
       if (reponseStatus.isNotOk) {
         throw ResponseException(reponseStatus.code, responseCode, message);
@@ -64,9 +60,7 @@ class Response<T> {
       return Response._(
         status: reponseStatus,
         message: message,
-        data: onTransform != null
-            ? onTransform(jsonResponse, responseCode)
-            : null,
+        data: onTransform != null ? onTransform(jsonResponse) : null,
       );
     } catch (e) {
       Log().error('Response.catch', e);

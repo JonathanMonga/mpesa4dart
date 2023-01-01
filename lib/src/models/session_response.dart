@@ -19,40 +19,39 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import 'package:built_value/built_value.dart';
-import 'package:built_value/serializer.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:mpesa4dart/src/constants/api_params.dart';
-import 'package:mpesa4dart/src/models/model_interface.dart';
-import 'package:mpesa4dart/src/models/serializers.dart';
 
 part 'session_response.g.dart';
 
-abstract class SessionResponse
-    with ModelInterface
-    implements Built<SessionResponse, SessionResponseBuilder> {
-  SessionResponse._();
-  factory SessionResponse([void Function(SessionResponseBuilder) updates]) =
-      _$SessionResponse;
+/// An annotation for the code generator to know that this class needs the
+/// JSON serialization logic to be generated.
+@JsonSerializable()
+class SessionResponse {
+  SessionResponse(
+      this.outputResponseCode, this.outputResponseDesc, this.outputSessionID);
 
-  @BuiltValueField(wireName: ApiParams.OutputResponseCode)
-  String get outputResponseCode;
+  @JsonKey(name: ApiParams.OutputResponseCode)
+  String outputResponseCode;
 
-  @BuiltValueField(wireName: ApiParams.OutputResponseDesc)
-  String get outputResponseDesc;
+  @JsonKey(name: ApiParams.OutputResponseDesc)
+  String outputResponseDesc;
 
-  @BuiltValueField(wireName: ApiParams.OutputSessionID)
-  String get outputSessionID;
+  @JsonKey(name: ApiParams.OutputSessionID)
+  String outputSessionID;
+
+  /// A necessary factory constructor for creating a new User instance
+  /// from a map. Pass the map to the generated `_$UserFromJson()` constructor.
+  /// The constructor is named after the source class, in this case, User.
+  factory SessionResponse.fromJson(Map<String, dynamic> json) =>
+      _$SessionResponseFromJson(json);
+
+  /// `toJson` is the convention for a class to declare support for serialization
+  /// to JSON. The implementation simply calls the private, generated
+  /// helper method `_$UserToJson`.
+  Map<String, dynamic> toJson() => _$SessionResponseToJson(this);
 
   @override
-  Map<String, dynamic> toJson() {
-    return serializers.serializeWith(SessionResponse.serializer, this)
-        as Map<String, dynamic>;
-  }
-
-  static SessionResponse? fromJson(Map<String, dynamic> json) {
-    return serializers.deserializeWith(SessionResponse.serializer, json);
-  }
-
-  static Serializer<SessionResponse> get serializer =>
-      _$sessionResponseSerializer;
+  String toString() =>
+      '$runtimeType(outputResponseCode: $outputResponseCode, outputResponseDesc: $outputResponseDesc, outputSessionID: $outputSessionID)';
 }
